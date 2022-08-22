@@ -134,3 +134,9 @@ operatorHealth:
   startupProbe:
     failureThreshold: 30
     periodSeconds: 10
+
+# Configure nodeAffinity
+nodeAffinity:
+  create: false
+  key: "layer"
+  value: "flink"

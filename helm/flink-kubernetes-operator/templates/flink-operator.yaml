@@ -47,6 +47,17 @@ spec:
           {{- end }}
         {{- end }}
     spec:
+      {{- if .Values.nodeAffinity.create }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: {{ .Values.nodeAffinity.key }}
+                    operator: In
+                    values:
+                      - {{ .Values.nodeAffinity.value }}
+        {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       {{- with .Values.imagePullSecrets }}
